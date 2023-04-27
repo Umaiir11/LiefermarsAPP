@@ -39,11 +39,22 @@ class _URLState extends State<URL> {
             children: [
               WebView(
                 gestureNavigationEnabled: true,
-                initialUrl: 'https://liefermars.de/restaurant',
+                initialUrl: 'https://api.liefermars.de/',
                 initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
                 javascriptMode: JavascriptMode.unrestricted,
                 onWebViewCreated: (WebViewController controller) async {
                   _webViewController = controller;
+                  _webViewController.runJavascript("navigator.geolocation.getCurrentPosition(function(position) { console.log(position); });");
+
+                  controller.runJavascript('''
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var locationName = position.coords.latitude + ', ' + position.coords.longitude;
+        setLocation(locationName);
+      }, function(error) {
+        showLocationError();
+      });
+    ''');
+
                   // Check if location service is enabled
                   bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
                   if (isLocationEnabled) {
