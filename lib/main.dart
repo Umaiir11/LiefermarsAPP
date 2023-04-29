@@ -4,7 +4,6 @@ import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:responsive_framework/responsive_wrapper.dart';
-import 'package:shimmer/shimmer.dart';
 import 'package:untitled4/Screen/Widget.dart';
 
 import 'Screen/URL.dart';
@@ -37,14 +36,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.pink),
+      theme: ThemeData(primarySwatch: Colors.deepOrange),
       home: Scaffold(
           backgroundColor: Colors.white,
           body: Stack(
             children: <Widget>[
-
-
-
               Center(
                   child: WidgetRingAnimator(
                 size: 160,
@@ -58,7 +54,7 @@ class _MyAppState extends State<MyApp> {
                 ringIconsSize: 4,
                 // ringIconsColor: Colors.grey[200],
                 ringAnimation: Curves.easeInOutQuart,
-                ringColor: Colors.pinkAccent,
+                ringColor: Colors.deepOrangeAccent,
                 reverse: false,
                 ringAnimationInSeconds: 10,
                 child: Container(
@@ -69,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                       backgroundColor: Colors.transparent,
                       child: Image.asset(
                         'assets/app_logo.png',
-                        color: Colors.pinkAccent,
+                        color: Colors.deepOrangeAccent,
                         height: 75,
                       ),
                       radius: 55.0,
@@ -79,7 +75,7 @@ class _MyAppState extends State<MyApp> {
               )),
               Center(
                 child: AvatarGlow(
-                  glowColor: Colors.pinkAccent,
+                  glowColor: Colors.deepOrangeAccent,
                   endRadius: 200.0,
                   duration: Duration(milliseconds: 2000),
                   repeat: true,
@@ -100,8 +96,6 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ),
               ),
-
-
               ResponsiveWrapper(
                 maxWidth: 1200,
                 minWidth: 480,
@@ -112,49 +106,38 @@ class _MyAppState extends State<MyApp> {
                   ResponsiveBreakpoint.resize(1000, name: DESKTOP),
                   ResponsiveBreakpoint.autoScale(2460, name: '4K'),
                 ],
-
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-
                     Center(
                       child: Container(
-                        margin: EdgeInsets.only(top: 115,),
+                        margin: EdgeInsets.only(
+                          top: 115,
+                        ),
                         child: Text(
                           "Liefermars",
                           style: GoogleFonts.ubuntu(
                               textStyle: TextStyle(
-                                  fontSize: 27,
-                                  color: Colors.black38,
-                                  fontWeight: FontWeight.w600,
-                                  letterSpacing: .5)),
+                                  fontSize: 27, color: Colors.black38, fontWeight: FontWeight.w600, letterSpacing: .5)),
                         ),
                       ),
                     ),
-
-                    SizedBox(height: 640,),
-
-                Center(
-                  child: Text(
-                        "Bestelle mit einem Fingertipp, genieße mit einem Schnapp!",
-                    style: GoogleFonts.ubuntu(
-                        textStyle: TextStyle(
-                            fontSize: 15,
-                            color: Colors.black38,
-                            fontWeight: FontWeight.w600,
-                            letterSpacing: .5)),
-                  ),
+                    SizedBox(
+                      height: 640,
+                    ),
+                    Center(
+                      child: Image.asset(
+                        'assets/meapp.png',
+                        fit: BoxFit.cover,
+                        height: 75,
+                      ),
+                    ),
+                  ],
                 ),
-
-
-                ],),
               ),
-              SizedBox(height: 150,),
-
-
-
-
-
+              SizedBox(
+                height: 150,
+              ),
             ],
           )),
     );

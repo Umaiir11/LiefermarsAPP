@@ -9,7 +9,7 @@ import 'package:flutter/services.dart';
 class WidgetRingAnimator extends StatefulWidget {
   const WidgetRingAnimator({
     required this.child,
-    this.ringColor = Colors.pinkAccent,
+    this.ringColor = Colors.deepOrangeAccent,
     this.ringAnimation = Curves.linear,
     this.ringAnimationInSeconds = 5,
     this.ringIconsSize = 3,
