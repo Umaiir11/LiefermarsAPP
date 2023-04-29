@@ -87,8 +87,8 @@ class _URLState extends State<URL> {
               if (isLoading)
                 Center(
                   child: LoadingAnimationWidget.twistingDots(
-                    leftDotColor: const Color(0xFFF64E93),
-                    rightDotColor: const Color(0xEF37D5EA),
+                    leftDotColor: const Color(0xE5FF8035),
+                    rightDotColor: const Color(0xE458B641),
                     size: 40,
                   ),
                 ),
