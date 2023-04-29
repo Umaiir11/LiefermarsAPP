@@ -42,6 +42,8 @@ class _URLState extends State<URL> {
                 initialUrl: 'https://api.liefermars.de/',
                 initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
                 javascriptMode: JavascriptMode.unrestricted,
+                zoomEnabled: false,
+
                 onWebViewCreated: (WebViewController controller) async {
                   _webViewController = controller;
                   _webViewController.runJavascript("navigator.geolocation.getCurrentPosition(function(position) { console.log(position); });");
@@ -54,6 +56,7 @@ class _URLState extends State<URL> {
         showLocationError();
       });
     ''');
+
 
                   // Check if location service is enabled
                   bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
