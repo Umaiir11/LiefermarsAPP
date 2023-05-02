@@ -39,14 +39,19 @@ class _URLState extends State<URL> {
             children: [
               WebView(
                 gestureNavigationEnabled: true,
-                initialUrl: 'https://api.liefermars.de/',
+                initialUrl: 'https://liefermars.de/',
                 initialMediaPlaybackPolicy: AutoMediaPlaybackPolicy.always_allow,
                 javascriptMode: JavascriptMode.unrestricted,
                 zoomEnabled: false,
-
                 onWebViewCreated: (WebViewController controller) async {
+                  // Inject CSS to disable zooming
+                  controller.runJavascript("""
+      document.querySelector('body').style.touchAction = 'pan-x pan-y';
+    """);
+
                   _webViewController = controller;
-                  _webViewController.runJavascript("navigator.geolocation.getCurrentPosition(function(position) { console.log(position); });");
+                  _webViewController.runJavascript(
+                      "navigator.geolocation.getCurrentPosition(function(position) { console.log(position); });");
 
                   controller.runJavascript('''
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -56,7 +61,6 @@ class _URLState extends State<URL> {
         showLocationError();
       });
     ''');
-
 
                   // Check if location service is enabled
                   bool isLocationEnabled = await Geolocator.isLocationServiceEnabled();
@@ -80,6 +84,10 @@ class _URLState extends State<URL> {
                   }
                 },
                 onPageFinished: (String url) {
+                  // Inject CSS to disable zooming
+                  _webViewController.runJavascript("""
+      document.querySelector('body').style.touchAction = 'pan-x pan-y';
+    """);
                   _webViewController.runJavascript(
                       "if (navigator.geolocation) { navigator.geolocation.watchPosition = function(successCallback, errorCallback, options) { return new Promise((resolve, reject) => { navigator.geolocation.getCurrentPosition(successCallback, errorCallback, options); }); } };");
                   setState(() {
